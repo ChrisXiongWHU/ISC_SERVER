@@ -1,0 +1,78 @@
+<h1>Auth<h1>
+
+
+<!--{% csrf_token %} -->
+
+<button id="btn" >call phone</button>
+<div id="message"></div>
+
+<script type="text/javascript">
+
+window.onload = function() {
+    var oBtn = document.getElementById('btn');
+    var oCon = document.getElementById('con');
+    var div = document.getElementById('message');
+    var url_check = "{% url 'isc_auth:auth_check_ws' api_hostname identifer%}";
+    oBtn.onclick = function() {
+        oBtn.disabled = true;
+        ajax(url_check,function(str){
+            str = JSON.parse(str);
+            if(str.status == 'ok'){
+                div.innerHTML = "Phone connection is alive,do the authentication now";
+                do_auth_ajax();
+            }else if(str.status == 'pending'){
+                div.innerHTML = "Please check your phone and retry";
+                oBtn.disabled = false;
+            }
+        })
+    }
+}
+
+function do_auth_ajax(){
+    var oBtn = document.getElementById('btn');
+    var url_auth = "{% url 'isc_auth:auth' api_hostname identifer%}";
+    ajax(url_auth,function(str){
+        str = JSON.parse(str);
+            if(str.status == 'ok'){
+                var data = str.data;
+                var parent = str.parent;
+                window.parent.postMessage(data,parent);
+            }else if(str.status == 'pending'){
+                document.getElementById('message').innerHTML = "Phone Connection failed,Please retry";
+                oBtn.disabled = false;
+            }else if(str.status == 'denied'){
+                document.getElementById('message').innerHTML = "Auth Denied";
+                oBtn.disabled = false;
+            }   
+    })
+}
+
+
+function ajax(url, fnSucc, fnFaild){
+    //1.创建对象
+    var oAjax = null;
+    if(window.XMLHttpRequest){
+        oAjax = new XMLHttpRequest();
+    }else{
+        oAjax = new ActiveXObject("Microsoft.XMLHTTP");
+    }    
+    //2.连接服务器  
+    oAjax.open('GET', url, false);   //open(方法, url, 是否异步)    
+    //3.发送请求  
+    oAjax.send();   
+    //4.接收返回
+    oAjax.onreadystatechange = function(){  //OnReadyStateChange事件
+        if(oAjax.readyState == 4){  //4为完成
+            if(oAjax.status == 200){    //200为成功
+                fnSucc(oAjax.responseText) 
+            }else{
+                if(fnFaild){
+                    fnFaild();
+                }
+            }
+        }
+    };
+}
+
+
+</script>

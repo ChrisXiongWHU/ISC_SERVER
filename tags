@@ -1,0 +1,354 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+0001_initial.py	isc_auth/migrations/0001_initial.py	1;"	kind:file	line:1
+0002_device_seed.py	isc_auth/migrations/0002_device_seed.py	1;"	kind:file	line:1
+AES	isc_auth/tools/auth_tools/app_auth_tools.py	/^from Crypto.Cipher import AES$/;"	kind:namespace	line:6
+AES	isc_auth/tools/auth_tools/duoTools.py	/^from Crypto.Cipher import AES$/;"	kind:namespace	line:9
+AES	test/test_crpyto.py	/^from Crypto.Cipher import AES$/;"	kind:namespace	line:5
+ALLOWED_HOSTS	ISC_SERVER/settings.py	/^ALLOWED_HOSTS = ['*']$/;"	kind:variable	line:28
+AUTH_PASSWORD_VALIDATORS	ISC_SERVER/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:88
+AUTH_PREFIX	isc_auth/tools/auth_tools/duoTools.py	/^AUTH_PREFIX = 'AUTH'$/;"	kind:variable	line:14
+Account	initdb.py	/^from isc_auth.models import Account,Application,User,Device$/;"	kind:namespace	line:8
+Account	isc_auth/admin.py	/^from .models import Account,User,Application,Device$/;"	kind:namespace	line:5
+Account	isc_auth/explicit_auth/views.py	/^from isc_auth.models import Application,Account,User,Device$/;"	kind:namespace	line:14
+Account	isc_auth/models.py	/^class Account(models.Model):$/;"	kind:class	line:14
+Account	isc_auth/tools/auth_tools/duoTools.py	/^from isc_auth.models import Account,Application,createRandomFields,User$/;"	kind:namespace	line:4
+Account	test/explicit_auth/test_websocket.py	/^from isc_auth.models import Account,Application,User,Device$/;"	kind:namespace	line:5
+AppConfig	isc_auth/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:3
+Application	initdb.py	/^from isc_auth.models import Account,Application,User,Device$/;"	kind:namespace	line:8
+Application	isc_auth/admin.py	/^from .models import Account,User,Application,Device$/;"	kind:namespace	line:5
+Application	isc_auth/explicit_auth/views.py	/^from isc_auth.models import Application,Account,User,Device$/;"	kind:namespace	line:14
+Application	isc_auth/models.py	/^class Application(models.Model):$/;"	kind:class	line:37
+Application	isc_auth/tools/auth_tools/duoTools.py	/^from isc_auth.models import Account,Application,createRandomFields,User$/;"	kind:namespace	line:4
+Application	test/explicit_auth/test_websocket.py	/^from isc_auth.models import Account,Application,User,Device$/;"	kind:namespace	line:5
+AuthFailedError	isc_auth/tools/auth_tools/app_auth_tools.py	/^class AuthFailedError(Exception):$/;"	kind:class	line:26
+BASE_DIR	ISC_SERVER/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
+CHANNEL_LAYERS	ISC_SERVER/settings.py	/^CHANNEL_LAYERS = {$/;"	kind:variable	line:137
+CHCHES	ISC_SERVER/settings.py	/^CHCHES = {$/;"	kind:variable	line:129
+CONNECTION_REPLY_PREFIX	isc_auth/tools/auth_tools/app_auth_tools.py	/^CONNECTION_REPLY_PREFIX = "ACK"$/;"	kind:variable	line:14
+CONNECTION_SETUP_PREFIX	isc_auth/tools/auth_tools/app_auth_tools.py	/^CONNECTION_SETUP_PREFIX = "SYN"$/;"	kind:variable	line:13
+Channel	isc_auth/consumers.py	/^from channels import Group,Channel$/;"	kind:namespace	line:2
+Channel	isc_auth/tools/uniform_tools.py	/^from channels import Channel$/;"	kind:namespace	line:5
+Channel	test/explicit_auth/test_websocket.py	/^from channels import Channel$/;"	kind:namespace	line:3
+ChannelTestCase	test/explicit_auth/test_websocket.py	/^from channels.tests import ChannelTestCase,HttpClient $/;"	kind:namespace	line:4
+DATABASES	ISC_SERVER/settings.py	/^DATABASES = {$/;"	kind:variable	line:78
+DEBUG	ISC_SERVER/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
+DUO_PREFIX	isc_auth/tools/auth_tools/duoTools.py	/^DUO_PREFIX = 'TX'$/;"	kind:variable	line:13
+Device	initdb.py	/^from isc_auth.models import Account,Application,User,Device$/;"	kind:namespace	line:8
+Device	isc_auth/admin.py	/^from .models import Account,User,Application,Device$/;"	kind:namespace	line:5
+Device	isc_auth/consumers.py	/^from .models import Device$/;"	kind:namespace	line:9
+Device	isc_auth/explicit_auth/views.py	/^from isc_auth.models import Application,Account,User,Device$/;"	kind:namespace	line:14
+Device	isc_auth/models.py	/^class Device(models.Model):$/;"	kind:class	line:79
+Device	test/explicit_auth/test_websocket.py	/^from isc_auth.models import Account,Application,User,Device$/;"	kind:namespace	line:5
+DuoFormatException	isc_auth/tools/auth_tools/duoTools.py	/^class DuoFormatException(Exception):$/;"	kind:class	line:20
+EXPIRETIME	isc_auth/tools/auth_tools/duoTools.py	/^EXPIRETIME = 60$/;"	kind:variable	line:15
+EXPLICIT_AUTH_PREFIX	isc_auth/tools/auth_tools/app_auth_tools.py	/^EXPLICIT_AUTH_PREFIX = "AUTH"$/;"	kind:variable	line:17
+EXPLICIT_DENIED_PREFIX	isc_auth/tools/auth_tools/app_auth_tools.py	/^EXPLICIT_DENIED_PREFIX = "FAILED"$/;"	kind:variable	line:16
+EXPLICIT_REPLY_COMMAND	isc_auth/routing.py	/^from tools.auth_tools.app_auth_tools import EXPLICIT_REPLY_COMMAND$/;"	kind:namespace	line:7
+EXPLICIT_REPLY_COMMAND	isc_auth/tools/auth_tools/app_auth_tools.py	/^EXPLICIT_REPLY_COMMAND = "EXPLICIT"$/;"	kind:variable	line:20
+EXPLICIT_SUCCEED_PREFIX	isc_auth/tools/auth_tools/app_auth_tools.py	/^EXPLICIT_SUCCEED_PREFIX = "SUCCEED"$/;"	kind:variable	line:15
+Group	isc_auth/consumers.py	/^from channels import Group,Channel$/;"	kind:namespace	line:2
+Group	isc_auth/explicit_auth/views.py	/^from channels import Group$/;"	kind:namespace	line:10
+HttpClient	test/explicit_auth/test_websocket.py	/^from channels.tests import ChannelTestCase,HttpClient $/;"	kind:namespace	line:4
+HttpRequest	isc_auth/explicit_auth/views.py	/^from django.http import HttpRequest,HttpResponse$/;"	kind:namespace	line:5
+HttpResponse	isc_auth/explicit_auth/views.py	/^from django.http import HttpRequest,HttpResponse$/;"	kind:namespace	line:5
+INSTALLED_APPS	ISC_SERVER/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
+IntegrityError	isc_auth/explicit_auth/views.py	/^from django.db.utils import IntegrityError$/;"	kind:namespace	line:7
+Isc_authConfig	isc_auth/apps.py	/^class Isc_authConfig(AppConfig):$/;"	kind:class	line:6
+LANGUAGE_CODE	ISC_SERVER/settings.py	/^LANGUAGE_CODE = 'en-us'$/;"	kind:variable	line:107
+MIDDLEWARE	ISC_SERVER/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:44
+Meta	isc_auth/models.py	/^    class Meta():$/;"	kind:class	line:109
+Meta	isc_auth/models.py	/^    class Meta():$/;"	kind:class	line:73
+Migration	isc_auth/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	isc_auth/migrations/0002_device_seed.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+ROOT_URLCONF	ISC_SERVER/settings.py	/^ROOT_URLCONF = 'ISC_SERVER.urls'$/;"	kind:variable	line:54
+SECRET_KEY	ISC_SERVER/settings.py	/^SECRET_KEY = '*+&!gba)_+wgq4s(ba@*o97i5n(mtr=0$u8-y%#r-r889j$!km'$/;"	kind:variable	line:23
+SMS_Call_Tool	isc_auth/tools/auth_tools/text_mobile_tools.py	/^class SMS_Call_Tool(object):$/;"	kind:class	line:8
+STATICFILES_DIRS	ISC_SERVER/settings.py	/^STATICFILES_DIRS = [$/;"	kind:variable	line:123
+STATIC_URL	ISC_SERVER/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:121
+TEMPLATES	ISC_SERVER/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:56
+TIME_ZONE	ISC_SERVER/settings.py	/^TIME_ZONE = 'Asia\/Shanghai' $/;"	kind:variable	line:109
+USE_I18N	ISC_SERVER/settings.py	/^USE_I18N = True$/;"	kind:variable	line:111
+USE_L10N	ISC_SERVER/settings.py	/^USE_L10N = True$/;"	kind:variable	line:113
+USE_TZ	ISC_SERVER/settings.py	/^USE_TZ = True$/;"	kind:variable	line:115
+User	initdb.py	/^from isc_auth.models import Account,Application,User,Device$/;"	kind:namespace	line:8
+User	isc_auth/admin.py	/^from .models import Account,User,Application,Device$/;"	kind:namespace	line:5
+User	isc_auth/explicit_auth/views.py	/^from isc_auth.models import Application,Account,User,Device$/;"	kind:namespace	line:14
+User	isc_auth/models.py	/^class User(models.Model):$/;"	kind:class	line:65
+User	isc_auth/tools/auth_tools/duoTools.py	/^from isc_auth.models import Account,Application,createRandomFields,User$/;"	kind:namespace	line:4
+User	test/explicit_auth/test_websocket.py	/^from isc_auth.models import Account,Application,User,Device$/;"	kind:namespace	line:5
+WSGI_APPLICATION	ISC_SERVER/settings.py	/^WSGI_APPLICATION = 'ISC_SERVER.wsgi.application'$/;"	kind:variable	line:72
+WebDriverWait	test/general_tools.py	/^from selenium.webdriver.support.ui import WebDriverWait$/;"	kind:namespace	line:4
+WebSocketTests	test/explicit_auth/test_websocket.py	/^class WebSocketTests(ChannelTestCase):$/;"	kind:class	line:15
+__call	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    def __call(self,phone_number,auth_code):$/;"	kind:member	line:52
+__get_general_aug	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    def __get_general_aug(self,action_type):$/;"	kind:member	line:23
+__get_messages	test/general_tools.py	/^def __get_messages(driver):$/;"	kind:function	line:51
+__init__.py	ISC_SERVER/__init__.py	1;"	kind:file	line:1
+__init__.py	isc_auth/__init__.py	1;"	kind:file	line:1
+__init__.py	isc_auth/explicit_auth/__init__.py	1;"	kind:file	line:1
+__init__.py	isc_auth/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	isc_auth/tools/__init__.py	1;"	kind:file	line:1
+__init__.py	isc_auth/tools/auth_tools/__init__.py	1;"	kind:file	line:1
+__init__.py	test/__init__.py	1;"	kind:file	line:1
+__init__.py	test/explicit_auth/__init__.py	1;"	kind:file	line:1
+__init__.py	test/explicit_auth/test_instance/__init__.py	1;"	kind:file	line:1
+__send_sms	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    def __send_sms(self,phone_number,auth_code,wait_time):$/;"	kind:member	line:67
+__str__	isc_auth/models.py	/^    def __str__(self):                                                                                                         $/;"	kind:member	line:76
+__str__	isc_auth/models.py	/^    def __str__(self):                                                                                                         $/;"	kind:member	line:92
+__str__	isc_auth/models.py	/^    def __str__(self):$/;"	kind:member	line:33
+__str__	isc_auth/models.py	/^    def __str__(self):$/;"	kind:member	line:46
+_hmac_sha1	isc_auth/tools/auth_tools/duoTools.py	/^def _hmac_sha1(key, msg):$/;"	kind:function	line:53
+_parse_vals	isc_auth/tools/auth_tools/duoTools.py	/^def _parse_vals(key, val, prefix, ikey):$/;"	kind:function	line:90
+account	isc_auth/models.py	/^    account = models.ForeignKey(Account,on_delete=models.CASCADE)$/;"	kind:variable	line:44
+account	isc_auth/models.py	/^    account = models.ForeignKey(Account,on_delete=models.CASCADE)$/;"	kind:variable	line:71
+account	isc_auth/models.py	/^    account = models.ForeignKey(Account,on_delete=models.CASCADE)$/;"	kind:variable	line:89
+account_email	isc_auth/models.py	/^    account_email = models.EmailField(unique=True)$/;"	kind:variable	line:18
+account_name	isc_auth/models.py	/^    account_name = models.CharField(max_length=30)$/;"	kind:variable	line:19
+account_phone	isc_auth/models.py	/^    account_phone = models.CharField(max_length=11)$/;"	kind:variable	line:20
+account_sid	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    account_sid = '99cf6324d1625cf434ef4a9b893bbcdc'$/;"	kind:variable	line:11
+action	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    def action(self,phone_number,auth_code,wait_time,action_type):$/;"	kind:member	line:81
+admin	ISC_SERVER/urls.py	/^from django.contrib import admin$/;"	kind:namespace	line:2
+admin	isc_auth/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
+admin.py	isc_auth/admin.py	1;"	kind:file	line:1
+api_hostname	isc_auth/models.py	/^    api_hostname = models.CharField(max_length=8,unique=True)$/;"	kind:variable	line:21
+app_auth_tools	isc_auth/consumers.py	/^from tools.auth_tools import app_auth_tools$/;"	kind:namespace	line:7
+app_auth_tools	isc_auth/explicit_auth/views.py	/^from isc_auth.tools.auth_tools import app_auth_tools,duoTools,text_mobile_tools$/;"	kind:namespace	line:15
+app_auth_tools	test/explicit_auth/test_websocket.py	/^from isc_auth.tools.auth_tools import app_auth_tools$/;"	kind:namespace	line:7
+app_auth_tools	test/explicit_auth/test_websocket.py	/^from isc_auth.tools.auth_tools import app_auth_tools$/;"	kind:namespace	line:9
+app_auth_tools.py	isc_auth/tools/auth_tools/app_auth_tools.py	1;"	kind:file	line:1
+app_id	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    app_id = '4e89b79fee3c440f92ec84607b5a3468'$/;"	kind:variable	line:19
+app_name	isc_auth/urls.py	/^app_name = 'isc_auth'$/;"	kind:variable	line:6
+application	ISC_SERVER/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
+apps.py	isc_auth/apps.py	1;"	kind:file	line:1
+asgi	ISC_SERVER/asgi.py	/^import channels.asgi$/;"	kind:namespace	line:2
+asgi.py	ISC_SERVER/asgi.py	1;"	kind:file	line:1
+auth	isc_auth/explicit_auth/views.py	/^def auth(request,api_hostname,identifer):$/;"	kind:function	line:274
+auth_check_ws	isc_auth/explicit_auth/views.py	/^def auth_check_ws(request,api_hostname,identifer):$/;"	kind:function	line:249
+auth_message_handle	isc_auth/consumers.py	/^def auth_message_handle(message,api_hostname,identifer):$/;"	kind:function	line:62
+auth_message_handle	isc_auth/routing.py	/^from .consumers import ws_connect,ws_message,ws_disconnect,auth_message_handle$/;"	kind:namespace	line:5
+auth_pre	isc_auth/explicit_auth/views.py	/^def auth_pre(request,api_hostname):$/;"	kind:function	line:29
+auth_redirect	isc_auth/explicit_auth/views.py	/^def auth_redirect(request,api_hostname,identifer):$/;"	kind:function	line:175
+auth_result_common_action	isc_auth/explicit_auth/views.py	/^def auth_result_common_action(request,is_succeed):$/;"	kind:function	line:215
+auth_text_gen	test/test_crpyto.py	/^def auth_text_gen(key,text):$/;"	kind:function	line:52
+authorization	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    authorization = "{id}:{time}"$/;"	kind:variable	line:17
+base64	isc_auth/tools/auth_tools/app_auth_tools.py	/^import base64$/;"	kind:namespace	line:4
+base64	isc_auth/tools/auth_tools/duoTools.py	/^import hashlib,hmac,time,qrcode,cStringIO,base64$/;"	kind:namespace	line:8
+base64	isc_auth/tools/auth_tools/text_mobile_tools.py	/^import base64$/;"	kind:namespace	line:2
+base64	test/explicit_auth/test_websocket.py	/^import base64$/;"	kind:namespace	line:10
+base64	test/test_crpyto.py	/^import base64$/;"	kind:namespace	line:3
+bind_device	isc_auth/explicit_auth/views.py	/^def bind_device(request,api_hostname,identifer):$/;"	kind:function	line:130
+cStringIO	isc_auth/tools/auth_tools/app_auth_tools.py	/^import cStringIO$/;"	kind:namespace	line:9
+cStringIO	isc_auth/tools/auth_tools/duoTools.py	/^import hashlib,hmac,time,qrcode,cStringIO,base64$/;"	kind:namespace	line:8
+cache	isc_auth/consumers.py	/^from django.core.cache import cache$/;"	kind:namespace	line:4
+cache	isc_auth/explicit_auth/views.py	/^from django.core.cache import cache$/;"	kind:namespace	line:8
+call_function	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    call_function = 'Calls'$/;"	kind:variable	line:13
+call_operation	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    call_operation = 'voiceCode'$/;"	kind:variable	line:15
+channel_layer	ISC_SERVER/asgi.py	/^channel_layer = channels.asgi.get_channel_layer()/;"	kind:variable	line:5
+channel_routing	ISC_SERVER/routing.py	/^channel_routing = [$/;"	kind:variable	line:4
+channel_session	isc_auth/consumers.py	/^from channels.sessions import channel_session$/;"	kind:namespace	line:3
+channel_session	isc_auth/explicit_auth/consumers.py	/^from channels.sessions import channel_session$/;"	kind:namespace	line:3
+channels	ISC_SERVER/asgi.py	/^import channels.asgi$/;"	kind:namespace	line:2
+chardet	isc_auth/tools/auth_tools/duoTools.py	/^        import chardet$/;"	kind:namespace	line:36
+chardet	test/general_tools.py	/^import chardet$/;"	kind:namespace	line:5
+chardet	test/test_crpyto.py	/^import chardet$/;"	kind:namespace	line:4
+checkUserEnrolled	isc_auth/tools/auth_tools/duoTools.py	/^def checkUserEnrolled(userName,account):$/;"	kind:function	line:70
+check_bind	isc_auth/explicit_auth/views.py	/^def check_bind(request,api_hostname,identifer):$/;"	kind:function	line:143
+choice	test/test_crpyto.py	/^choice = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'$/;"	kind:variable	line:10
+clear_db	initdb.py	/^def clear_db():$/;"	kind:function	line:30
+connect_websocket_return_code	test/explicit_auth/test_websocket.py	/^    def connect_websocket_return_code(self,client,hostname,identifer):$/;"	kind:member	line:26
+consumers.py	isc_auth/consumers.py	1;"	kind:file	line:1
+consumers.py	isc_auth/explicit_auth/consumers.py	1;"	kind:file	line:1
+createRandomFields	isc_auth/explicit_auth/views.py	/^from isc_auth.tools.uniform_tools import get_session_from_channels,createRandomFields$/;"	kind:namespace	line:12
+createRandomFields	isc_auth/models.py	/^from tools.uniform_tools import createRandomFields$/;"	kind:namespace	line:9
+createRandomFields	isc_auth/tools/auth_tools/app_auth_tools.py	/^from isc_auth.tools.uniform_tools import createRandomFields$/;"	kind:namespace	line:7
+createRandomFields	isc_auth/tools/auth_tools/duoTools.py	/^from isc_auth.models import Account,Application,createRandomFields,User$/;"	kind:namespace	line:4
+createRandomFields	isc_auth/tools/auth_tools/duoTools.py	/^from isc_auth.tools.uniform_tools import createRandomFields$/;"	kind:namespace	line:5
+createRandomFields	isc_auth/tools/uniform_tools.py	/^def createRandomFields(size):$/;"	kind:function	line:9
+createRandomFields	test/test_crpyto.py	/^def createRandomFields(size):$/;"	kind:function	line:13
+custom_routing	isc_auth/routing.py	/^custom_routing = [$/;"	kind:variable	line:18
+dKey	isc_auth/models.py	/^    dKey = models.CharField('Device Key',max_length=256,null=True)$/;"	kind:variable	line:86
+datetime	isc_auth/explicit_auth/views.py	/^from datetime import datetime$/;"	kind:namespace	line:20
+db	isc_auth/migrations/0001_initial.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
+de	test/test_crpyto.py	/^def de(key,text):$/;"	kind:function	line:46
+decrypt	isc_auth/tools/auth_tools/app_auth_tools.py	/^def decrypt(key,text):$/;"	kind:function	line:97
+decrypt	isc_auth/tools/auth_tools/duoTools.py	/^def decrypt(key,text):$/;"	kind:function	line:154
+decrypt	test/test_crpyto.py	/^def decrypt(key,text):$/;"	kind:function	line:40
+decrypt_and_validate_info	isc_auth/tools/auth_tools/app_auth_tools.py	/^def decrypt_and_validate_info(e,key,random_number,prefix=None):$/;"	kind:function	line:42
+decrypt_and_validate_info	test/test_crpyto.py	/^def decrypt_and_validate_info(e,key,random_number,prefix=None):$/;"	kind:function	line:80
+del_chanell_session	isc_auth/tools/uniform_tools.py	/^def del_chanell_session(message,*sessions):$/;"	kind:function	line:17
+deletion	isc_auth/migrations/0001_initial.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
+dependencies	isc_auth/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:13
+dependencies	isc_auth/migrations/0002_device_seed.py	/^    dependencies = [$/;"	kind:variable	line:10
+django	initdb.py	/^import django$/;"	kind:namespace	line:5
+django	isc_auth/migrations/0001_initial.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
+django	manage.py	/^            import django$/;"	kind:namespace	line:14
+duoTools	isc_auth/explicit_auth/views.py	/^from isc_auth.tools.auth_tools import app_auth_tools,duoTools,text_mobile_tools$/;"	kind:namespace	line:15
+duoTools.py	isc_auth/tools/auth_tools/duoTools.py	1;"	kind:file	line:1
+encrypt	isc_auth/tools/auth_tools/app_auth_tools.py	/^def encrypt(key,text):$/;"	kind:function	line:79
+encrypt	isc_auth/tools/auth_tools/duoTools.py	/^def encrypt(key,text):$/;"	kind:function	line:136
+encrypt	test/test_crpyto.py	/^def encrypt(key,text):$/;"	kind:function	line:20
+enroll	isc_auth/explicit_auth/views.py	/^def enroll(request,api_hostname):$/;"	kind:function	line:97
+execute_from_command_line	manage.py	/^        from django.core.management import execute_from_command_line$/;"	kind:namespace	line:8
+explicit_auth	isc_auth/urls.py	/^import explicit_auth.views$/;"	kind:namespace	line:2
+explicit_auth_message_handle	isc_auth/explicit_auth/consumers.py	/^def explicit_auth_message_handle(message,api_hostname,identifer):$/;"	kind:function	line:6
+explicit_auth_message_handle	isc_auth/routing.py	/^from explicit_auth.consumers import explicit_auth_message_handle$/;"	kind:namespace	line:6
+explicit_auth_urlpatterns	isc_auth/urls.py	/^explicit_auth_urlpatterns = [$/;"	kind:variable	line:11
+explicit_text_gen	test/test_crpyto.py	/^def explicit_text_gen(key,text):$/;"	kind:function	line:60
+field	isc_auth/migrations/0001_initial.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='isc_auth.User'),$/;"	kind:variable	line:59
+field	isc_auth/migrations/0002_device_seed.py	/^            field=models.CharField(max_length=16, null=True, verbose_name='Random Seed'),$/;"	kind:variable	line:18
+fields	isc_auth/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:19
+fields	isc_auth/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:29
+fields	isc_auth/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:39
+fields	isc_auth/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:49
+gen_b64_random_and_code	isc_auth/tools/auth_tools/app_auth_tools.py	/^def gen_b64_random_and_code(key,prefix,data=None):$/;"	kind:function	line:29
+gen_b64_random_and_code	test/test_crpyto.py	/^def gen_b64_random_and_code(key,prefix,data=None):$/;"	kind:function	line:68
+general_routing	isc_auth/routing.py	/^general_routing = [$/;"	kind:variable	line:12
+general_tools.py	test/general_tools.py	1;"	kind:file	line:1
+generate_aes_key	isc_auth/tools/auth_tools/app_auth_tools.py	/^def generate_aes_key():$/;"	kind:function	line:72
+generate_aes_key	isc_auth/tools/auth_tools/duoTools.py	/^def generate_aes_key():$/;"	kind:function	line:132
+generate_captcha	isc_auth/tools/auth_tools/app_auth_tools.py	/^def generate_captcha(api_hostname,identifer,dKey):$/;"	kind:function	line:56
+generate_captcha	isc_auth/tools/auth_tools/duoTools.py	/^def generate_captcha(api_hostname,identifer,dKey):$/;"	kind:function	line:119
+get_channel_layer	isc_auth/explicit_auth/views.py	/^from channels.asgi import get_channel_layer$/;"	kind:namespace	line:11
+get_channel_layer	isc_auth/tools/uniform_tools.py	/^from channels.asgi import get_channel_layer$/;"	kind:namespace	line:4
+get_session_from_channels	isc_auth/explicit_auth/views.py	/^from isc_auth.tools.uniform_tools import get_session_from_channels,createRandomFields$/;"	kind:namespace	line:12
+get_session_from_channels	isc_auth/tools/uniform_tools.py	/^def get_session_from_channels(channels_list,session=None):$/;"	kind:function	line:30
+get_session_from_group	isc_auth/tools/uniform_tools.py	/^def get_session_from_group(group_name,session=None):$/;"	kind:function	line:23
+get_wsgi_application	ISC_SERVER/wsgi.py	/^from django.core.wsgi import get_wsgi_application$/;"	kind:namespace	line:12
+hashlib	isc_auth/tools/auth_tools/duoTools.py	/^import hashlib,hmac,time,qrcode,cStringIO,base64$/;"	kind:namespace	line:8
+hashlib	isc_auth/tools/auth_tools/text_mobile_tools.py	/^import hashlib$/;"	kind:namespace	line:4
+hmac	isc_auth/tools/auth_tools/duoTools.py	/^import hashlib,hmac,time,qrcode,cStringIO,base64$/;"	kind:namespace	line:8
+iKey	isc_auth/models.py	/^    iKey = models.CharField('Integration Key',max_length=20,unique=True)$/;"	kind:variable	line:42
+identifer	isc_auth/models.py	/^    identifer = models.CharField(max_length=20)$/;"	kind:variable	line:83
+include	ISC_SERVER/routing.py	/^from channels import include$/;"	kind:namespace	line:1
+include	ISC_SERVER/urls.py	/^from django.conf.urls import url,include$/;"	kind:namespace	line:1
+include	isc_auth/urls.py	/^from django.conf.urls import include,url$/;"	kind:namespace	line:1
+init_db	initdb.py	/^def init_db():$/;"	kind:function	line:11
+init_db	test/explicit_auth/test_websocket.py	/^from initdb import init_db$/;"	kind:namespace	line:6
+init_db_and_get_data	test/explicit_auth/test_websocket.py	/^    def init_db_and_get_data(self):$/;"	kind:member	line:17
+initdb.py	initdb.py	1;"	kind:file	line:1
+initial	isc_auth/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:11
+is_activated	isc_auth/models.py	/^    is_activated = models.BooleanField(default=False)$/;"	kind:variable	line:84
+json	isc_auth/consumers.py	/^import json$/;"	kind:namespace	line:6
+json	isc_auth/explicit_auth/views.py	/^import json,time,random$/;"	kind:namespace	line:18
+json	isc_auth/tools/auth_tools/text_mobile_tools.py	/^import json$/;"	kind:namespace	line:5
+json	isc_auth/tools/uniform_tools.py	/^import json$/;"	kind:namespace	line:6
+json	test/explicit_auth/test_websocket.py	/^import json$/;"	kind:namespace	line:11
+manage.py	manage.py	1;"	kind:file	line:1
+math	test/test_crpyto.py	/^import math$/;"	kind:namespace	line:6
+message_function	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    message_function = 'Messages'$/;"	kind:variable	line:12
+message_operation	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    message_operation = 'templateSMS'$/;"	kind:variable	line:14
+migrations	isc_auth/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+migrations	isc_auth/migrations/0002_device_seed.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+model_name	isc_auth/migrations/0001_initial.py	/^            model_name='device',$/;"	kind:variable	line:57
+model_name	isc_auth/migrations/0002_device_seed.py	/^            model_name='device',$/;"	kind:variable	line:16
+models	isc_auth/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+models	isc_auth/migrations/0001_initial.py	/^import django.db.models.deletion$/;"	kind:namespace	line:6
+models	isc_auth/migrations/0002_device_seed.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+models	isc_auth/models.py	/^from django.db import models$/;"	kind:namespace	line:5
+models	isc_auth/tools/auth_tools/duoTools.py	/^from django.db import models$/;"	kind:namespace	line:3
+models.py	isc_auth/models.py	1;"	kind:file	line:1
+multiplex	isc_auth/tools/uniform_tools.py	/^def multiplex(message,channel):$/;"	kind:function	line:46
+multiplex_auth	isc_auth/tools/uniform_tools.py	/^def multiplex_auth(message,channel):$/;"	kind:function	line:38
+name	isc_auth/apps.py	/^    name = 'isc_auth'$/;"	kind:variable	line:7
+name	isc_auth/migrations/0001_initial.py	/^            name='Account',$/;"	kind:variable	line:18
+name	isc_auth/migrations/0001_initial.py	/^            name='Application',$/;"	kind:variable	line:28
+name	isc_auth/migrations/0001_initial.py	/^            name='Device',$/;"	kind:variable	line:38
+name	isc_auth/migrations/0001_initial.py	/^            name='User',$/;"	kind:variable	line:48
+name	isc_auth/migrations/0001_initial.py	/^            name='device',$/;"	kind:variable	line:66
+name	isc_auth/migrations/0001_initial.py	/^            name='user',$/;"	kind:variable	line:58
+name	isc_auth/migrations/0001_initial.py	/^            name='user',$/;"	kind:variable	line:62
+name	isc_auth/migrations/0002_device_seed.py	/^            name='seed',$/;"	kind:variable	line:17
+name	isc_auth/models.py	/^    name = models.CharField(max_length=30)$/;"	kind:variable	line:43
+new_account_hostname	isc_auth/models.py	/^    def new_account_hostname(self):$/;"	kind:member	line:24
+new_app	isc_auth/models.py	/^    def new_app(self,api_hostname):$/;"	kind:member	line:50
+new_device	isc_auth/models.py	/^    def new_device(self,api_hostname):$/;"	kind:member	line:96
+not_find_action	isc_auth/consumers.py	/^def not_find_action(message,api_hostname,identifer):$/;"	kind:function	line:56
+null_consumer	isc_auth/routing.py	/^from channels.routing import null_consumer$/;"	kind:namespace	line:4
+operations	isc_auth/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:16
+operations	isc_auth/migrations/0002_device_seed.py	/^    operations = [$/;"	kind:variable	line:14
+os	ISC_SERVER/asgi.py	/^import os$/;"	kind:namespace	line:1
+os	ISC_SERVER/settings.py	/^import os$/;"	kind:namespace	line:13
+os	ISC_SERVER/wsgi.py	/^import os$/;"	kind:namespace	line:10
+os	initdb.py	/^import os$/;"	kind:namespace	line:3
+os	manage.py	/^import os$/;"	kind:namespace	line:2
+parseDuoSig	isc_auth/tools/auth_tools/duoTools.py	/^def parseDuoSig(sig):$/;"	kind:function	line:23
+pyotp	isc_auth/explicit_auth/views.py	/^import pyotp$/;"	kind:namespace	line:19
+pyotp	isc_auth/models.py	/^import pyotp$/;"	kind:namespace	line:10
+python_2_unicode_compatible	isc_auth/models.py	/^from django.utils.encoding import python_2_unicode_compatible$/;"	kind:namespace	line:6
+qrcode	isc_auth/tools/auth_tools/app_auth_tools.py	/^import qrcode$/;"	kind:namespace	line:8
+qrcode	isc_auth/tools/auth_tools/duoTools.py	/^import hashlib,hmac,time,qrcode,cStringIO,base64$/;"	kind:namespace	line:8
+random	isc_auth/explicit_auth/views.py	/^import json,time,random$/;"	kind:namespace	line:18
+random	isc_auth/models.py	/^import random$/;"	kind:namespace	line:8
+random	isc_auth/tools/auth_tools/app_auth_tools.py	/^import random$/;"	kind:namespace	line:5
+random	isc_auth/tools/uniform_tools.py	/^import random$/;"	kind:namespace	line:7
+random	test/test_crpyto.py	/^import random$/;"	kind:namespace	line:7
+random_code_auth	isc_auth/explicit_auth/views.py	/^def random_code_auth(request,api_hostname,identifer):$/;"	kind:function	line:233
+receive_all	test/explicit_auth/test_websocket.py	/^from test.general_tools import receive_all$/;"	kind:namespace	line:8
+receive_all	test/general_tools.py	/^def receive_all(client):$/;"	kind:function	line:10
+redirect	isc_auth/explicit_auth/views.py	/^from django.shortcuts import render,redirect$/;"	kind:namespace	line:3
+render	isc_auth/explicit_auth/views.py	/^from django.shortcuts import render,redirect$/;"	kind:namespace	line:3
+requests	isc_auth/tools/auth_tools/text_mobile_tools.py	/^import requests$/;"	kind:namespace	line:1
+reverse	isc_auth/explicit_auth/views.py	/^from django.urls import reverse$/;"	kind:namespace	line:4
+route	isc_auth/routing.py	/^from channels import route$/;"	kind:namespace	line:3
+routing.py	ISC_SERVER/routing.py	1;"	kind:file	line:1
+routing.py	isc_auth/routing.py	1;"	kind:file	line:1
+sKey	isc_auth/models.py	/^    sKey = models.CharField('Secret Key',max_length=40)$/;"	kind:variable	line:41
+seed	isc_auth/models.py	/^    seed = models.CharField('Random Seed',max_length=16,null=True)$/;"	kind:variable	line:87
+send_websocket	test/general_tools.py	/^def send_websocket(dest,content,driver=None,handle=None):$/;"	kind:function	line:20
+session_for_reply_channel	isc_auth/tools/uniform_tools.py	/^from channels.sessions import session_for_reply_channel$/;"	kind:namespace	line:3
+settings.py	ISC_SERVER/settings.py	1;"	kind:file	line:1
+sig	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    sig = "{id}{token}{time}"$/;"	kind:variable	line:18
+signResponse	isc_auth/tools/auth_tools/duoTools.py	/^def signResponse(sigDicts,sKey):$/;"	kind:function	line:81
+sleep	test/general_tools.py	/^from time import sleep$/;"	kind:namespace	line:6
+sms_call_auth	isc_auth/explicit_auth/views.py	/^def sms_call_auth(request,api_hostname,identifer):  $/;"	kind:function	line:187
+soft_version	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    soft_version = '2014-06-30'$/;"	kind:variable	line:10
+sys	manage.py	/^import sys$/;"	kind:namespace	line:3
+templateId	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    templateId = '40166'$/;"	kind:variable	line:20
+test_connect_failed	test/explicit_auth/test_websocket.py	/^    def test_connect_failed(self):$/;"	kind:member	line:51
+test_connect_succeed	test/explicit_auth/test_websocket.py	/^    def test_connect_succeed(self):$/;"	kind:member	line:33
+test_crpyto.py	test/test_crpyto.py	1;"	kind:file	line:1
+test_explicit_auth_succeed	test/explicit_auth/test_websocket.py	/^    def test_explicit_auth_succeed(self):$/;"	kind:member	line:60
+test_websocket.py	test/explicit_auth/test_websocket.py	1;"	kind:file	line:1
+text_mobile_tools	isc_auth/explicit_auth/views.py	/^from isc_auth.tools.auth_tools import app_auth_tools,duoTools,text_mobile_tools$/;"	kind:namespace	line:15
+text_mobile_tools.py	isc_auth/tools/auth_tools/text_mobile_tools.py	1;"	kind:file	line:1
+time	isc_auth/explicit_auth/views.py	/^import json,time,random$/;"	kind:namespace	line:18
+time	isc_auth/tools/auth_tools/duoTools.py	/^import hashlib,hmac,time,qrcode,cStringIO,base64$/;"	kind:namespace	line:8
+time	isc_auth/tools/auth_tools/text_mobile_tools.py	/^import time$/;"	kind:namespace	line:3
+token	isc_auth/tools/auth_tools/text_mobile_tools.py	/^    token = '37da64eea931655922d0bb474d52edb2'$/;"	kind:variable	line:16
+unicode_literals	isc_auth/apps.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:1
+unicode_literals	isc_auth/migrations/0001_initial.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+unicode_literals	isc_auth/migrations/0002_device_seed.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+unicode_literals	isc_auth/models.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+uniform_tools.py	isc_auth/tools/uniform_tools.py	1;"	kind:file	line:1
+unique_together	isc_auth/migrations/0001_initial.py	/^            unique_together=set([('identifer', 'account')]),$/;"	kind:variable	line:67
+unique_together	isc_auth/migrations/0001_initial.py	/^            unique_together=set([('user_name', 'account')]),$/;"	kind:variable	line:63
+unique_together	isc_auth/models.py	/^        unique_together=(("identifer","account"),)$/;"	kind:variable	line:110
+unique_together	isc_auth/models.py	/^        unique_together=(("user_name","account"),)$/;"	kind:variable	line:74
+url	ISC_SERVER/urls.py	/^from django.conf.urls import url,include$/;"	kind:namespace	line:1
+url	isc_auth/urls.py	/^from django.conf.urls import include,url$/;"	kind:namespace	line:1
+url_hostname	isc_auth/urls.py	/^url_hostname = r'^api-(?P<api_hostname>[a-zA-Z1-9]+)\/frame\/%s\/$'$/;"	kind:variable	line:9
+url_hostname_identifer	isc_auth/urls.py	/^url_hostname_identifer = r'^api-(?P<api_hostname>[a-zA-Z1-9]+)\/(?P<identifer>[a-zA-Z1-9]{20})\/frame\/%s\/$'$/;"	kind:variable	line:8
+urlpatterns	ISC_SERVER/urls.py	/^urlpatterns = [$/;"	kind:variable	line:4
+urlpatterns	isc_auth/urls.py	/^urlpatterns = [$/;"	kind:variable	line:25
+urls.py	ISC_SERVER/urls.py	1;"	kind:file	line:1
+urls.py	isc_auth/urls.py	1;"	kind:file	line:1
+user	isc_auth/models.py	/^    user = models.ForeignKey(User,on_delete=models.CASCADE)$/;"	kind:variable	line:88
+user_name	isc_auth/models.py	/^    user_name = models.CharField(max_length=30)$/;"	kind:variable	line:69
+user_phone	isc_auth/models.py	/^    user_phone = models.CharField(max_length=11)$/;"	kind:variable	line:70
+validateParams	isc_auth/tools/auth_tools/duoTools.py	/^def validateParams(sigDicts,sKey):$/;"	kind:function	line:58
+views	isc_auth/urls.py	/^import explicit_auth.views$/;"	kind:namespace	line:2
+views.py	isc_auth/explicit_auth/views.py	1;"	kind:file	line:1
+webdriver	test/general_tools.py	/^from selenium import webdriver$/;"	kind:namespace	line:3
+websocket_path	isc_auth/routing.py	/^websocket_path = r"^\/api-(?P<api_hostname>[a-zA-Z0-9]+)\/(?P<identifer>[a-zA-Z0-9]{20})$"$/;"	kind:variable	line:9
+ws_connect	isc_auth/consumers.py	/^def ws_connect(message,api_hostname,identifer):$/;"	kind:function	line:14
+ws_connect	isc_auth/routing.py	/^from .consumers import ws_connect,ws_message,ws_disconnect,auth_message_handle$/;"	kind:namespace	line:5
+ws_disconnect	isc_auth/consumers.py	/^def ws_disconnect(message,api_hostname,identifer):$/;"	kind:function	line:52
+ws_disconnect	isc_auth/routing.py	/^from .consumers import ws_connect,ws_message,ws_disconnect,auth_message_handle$/;"	kind:namespace	line:5
+ws_message	isc_auth/consumers.py	/^def ws_message(message,api_hostname,identifer):$/;"	kind:function	line:43
+ws_message	isc_auth/routing.py	/^from .consumers import ws_connect,ws_message,ws_disconnect,auth_message_handle$/;"	kind:namespace	line:5
+wsgi.py	ISC_SERVER/wsgi.py	1;"	kind:file	line:1
+xframe_options_exempt	isc_auth/explicit_auth/views.py	/^from django.views.decorators.clickjacking import xframe_options_exempt$/;"	kind:namespace	line:6

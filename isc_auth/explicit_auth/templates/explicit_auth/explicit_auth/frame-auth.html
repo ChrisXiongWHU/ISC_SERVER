@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<title>使用Auth</title>
+		<meta charset="utf-8">
+		</script>
+		{% load static %}
+		<script src="{% static "jquery-1.9.1.js" %}"></script>
+		<script src="{% static "jquery.timer.js" %}"></script>	
+		<link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+		<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+	</head>
+	<body style="width: 700px; height: 500px; padding: 10px; background-color: #f9f9f9 ">
+		
+		<div class="container-fluid">
+			<div class="col-xs-3">
+				<p class="text-center">您正在使用Auth<br>尝试登入</p>
+				<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWIxNDQ5Y2JmNiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1YjE0NDljYmY2Ij48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" alt="..." class="img-responsive img-circle block-center">
+				<h4 class="text-center">Blog</h4>
+			</div>
+			<script>
+				$(document).ready(function(){
+					$(".btn-list").click(function(){
+						var order = $(this).attr("btn-data");
+						$(".list-item").each(function(){
+							if($(this).attr("list-order") == order) {
+								$(this).show();
+							}
+							else {
+								$(this).hide();
+							}
+						});
+						$(".carousel").carousel(1);
+						switch(order) {
+							case "1":
+							// Push
+							pushOngoing = true;
+							sendAuthPush();
+							break;
+							case "2":
+							// Phone
+							$("#numlist-phone").popover("hide");
+						$("#numlist-phone").removeClass('has-error');
+							var input = $("#sendCode-phone").siblings('ul').children('li');
+							input.children().val("");
+							if(againTime == 0) {
+								tryAgainBlock($("#again-phone"));
+								$.get("{% url 'isc_auth:text_auth' api_hostname identifer%}", {type: 'call'}, function(data, textStatus, xhr) {
+								
+								});
+							}
+							break;
+							case "3":
+							// sms
+							$("#numlist-sms").popover("hide");
+						$("#numlist-sms").removeClass('has-error');
+							var input = $("#sendCode-sms").siblings('ul').children('li');
+							input.children().val("");
+							if(againTime == 0) {
+								tryAgainBlock($("#again-sms"));
+								$.get("{% url 'isc_auth:text_auth' api_hostname identifer%}", {type: 'sms'}, function(data, textStatus, xhr) {
+									/*optional stuff to do after success */
+								});
+							}
+							break;
+							case "4":
+							$("#numlist-app").popover("hide");
+						$("#numlist-app").removeClass('has-error');
+							var input = $("#sendCode-app").siblings('ul').children('li');
+							input.children().val("");
+							break;
+							default:
+						}
+					});
+					var pushOngoing = false;
+					function sendAuthPush() {
+						$.get("{% url 'isc_auth:auth_check_ws' api_hostname identifer%}", {type: 'check-connection'}, function(data, textStatus, xhr) {
+							var obj = eval("(" + data + ")");
+							if(obj["status"] == "ok") {
+								$("#authPushPending").slideUp();
+								$.get("{% url 'isc_auth:push_auth' api_hostname identifer%}", {type: 'authpush'}, function(data, textStatus, xhr) {
+									var obj2 = eval("(" + data + ")");
+									if(pushOngoing) {
+										if(obj2["status"] == "ok") {
+											success();
+											var data = obj2["data"];
+                							var parent = obj2["parent"];
+                							window.parent.postMessage(data,parent);
+										}
+										else if(obj2["status"] == "denied") {
+											fail();
+										}
+										else {
+											sendAuthPush();
+										}
+									}
+								});
+							}
+							else if(obj["status"] == "pending") {
+								$("#authPushPending").slideDown();
+								sendAuthPush();
+							}
+						});
+					}
+					function success() {
+						$("#result-success").show();
+						$("#result-fail").hide();
+						$(".carousel").carousel(2);
+					}
+					function fail() {
+						$("#result-fail").show();
+						$("#result-success").hide();
+						$(".carousel").carousel(2);
+					}
+					$(".input-num").bind('input propertychange', function(event) {
+						var str = $(this).val();
+						if(str == "") {
+							var input = $(this).parent().siblings();
+							input.children().val("");
+							input.children()[0].focus();
+						}
+						else if(str.charAt(0) > '9' || str.charAt(0) < '0') {
+							$(this).val("");
+						}
+						else {
+								$(this).parent().next().children()[0].focus();
+						}
+					});
+					$(".btn-return").click(function(){
+						$(".carousel").carousel("prev");
+						pushOngoing = false;
+					});
+					function printObject(object) {
+						var str = "";
+						for(key in object) {
+							str += key;
+							str += ": ";
+							str += object[key];
+							str += "\n";
+						}
+						alert(str);
+					}
+					$("#sendCode-phone").click(function(event) {
+						var codes = getCodeSix($(this));
+						if(codes.length < 6) {
+							$("#numlist-phone").attr('data-content', '请输入完整的验证码。');
+							$("#numlist-phone").popover("show");
+							$("#numlist-phone").addClass('has-error');
+							var input = $(this).siblings('ul').children('li');
+							input.children().val("");
+							input.children()[0].focus();
+							return;
+						}
+
+						$("#numlist-phone").popover("hide");
+						$("#numlist-phone").removeClass('has-error');
+						$.post("{% url 'isc_auth:text_auth' api_hostname identifer%}", {type: 'call', code: getCodeSix($(this)) }, function(data, textStatus, xhr) {
+							var obj = eval("(" + data + ")");
+							if(obj["status"] == "ok") {
+								success();
+							}
+							else if(obj["status"] == "failed") {
+								$("#numlist-phone").attr('data-content', '验证码不正确。');
+								$("#numlist-phone").popover("show");
+								$("#numlist-phone").addClass('has-error');
+								var input = $(this).siblings('ul').children('li');
+							input.children().val("");
+							input.children()[0].focus();
+							}
+							else {
+
+							}
+						});
+					});
+					$("#sendCode-sms").click(function(event) {
+						
+						var codes = getCodeSix($(this));
+						if(codes.length < 6) {
+							$("#numlist-sms").attr('data-content', '请输入完整的验证码。');
+							$("#numlist-sms").popover("show");
+							$("#numlist-sms").addClass('has-error');
+							var input = $(this).siblings('ul').children('li');
+							input.children().val("");
+							input.children()[0].focus();
+							return;
+						}
+						$("#numlist-sms").popover("hide");
+						$("#numlist-sms").removeClass('has-error');
+						$.post("{% url 'isc_auth:text_auth' api_hostname identifer%}", {type: 'sms', code: getCodeSix($(this)) }, function(data, textStatus, xhr) {
+							var obj = eval("(" + data + ")");
+							if(obj["status"] == "ok") {
+								success();
+							}
+							else if(obj["status"] == "failed") {
+								$("#numlist-sms").attr('data-content', '验证码不正确。');
+								$("#numlist-sms").popover("show");
+								$("#numlist-sms").addClass('has-error');
+								var input = $(this).siblings('ul').children('li');
+							input.children().val("");
+							input.children()[0].focus();
+							}
+							else {
+
+							}
+						});
+					});
+					$("#sendCode-app").click(function(event) {
+						var codes = getCodeSix($(this));
+						if(codes.length < 6) {
+							$("#numlist-app").attr('data-content', '请输入完整的验证码。');
+							$("#numlist-app").popover("show");
+							$("#numlist-app").addClass('has-error');
+							var input = $(this).siblings('ul').children('li');
+							input.children().val("");
+							input.children()[0].focus();
+							return;
+						}
+						$("#numlist-app").popover("hide");
+						$("#numlist-app").removeClass('has-error');
+						$.post("{% url 'isc_auth:app_code_auth' api_hostname identifer%}", {type: 'codeapp', code: getCodeSix($(this)) }, function(data, textStatus, xhr) {
+							var obj = eval("(" + data + ")");
+							if(obj["status"] == "ok") {
+								success();
+							}
+							else if(obj["status"] == "failed") {
+								$("#numlist-app").attr('data-content', '验证码不正确。');
+								$("#numlist-app").popover("show");
+								$("#numlist-app").addClass('has-error');
+								var input = $(this).siblings('ul').children('li');
+							input.children().val("");
+							input.children()[0].focus();
+							}
+							else {
+
+							}
+						});
+					});
+					function getCodeSix(button) {
+						var numList = button.siblings('ul').children().children();
+						var code = "";
+						for (var i = 0; i < numList.length; i++) {
+							code += numList[i].value;
+						}
+						return code;
+					}
+					var againTime = 0;
+					function tryAgainBlock() {
+						var button = $(".btn-again");
+						againTime = 60;
+						button.text("重新获得验证码（" + againTime + "秒）");
+						button.addClass('disabled');
+							
+						var timer = $.timer(1000, function(timer) {
+							if(againTime > 1){
+								againTime--;
+								button.text("重新获得验证码（" + againTime + "秒）");
+								timer.reset(1000);
+							}
+							else {
+								againTime = 0;
+								button.text("重新获得验证码");
+								button.removeClass('disabled');
+							}
+						});
+					}
+
+					$("#again-phone").click(function(event) {
+						if($(this).hasClass('disabled'))
+							return;
+						tryAgainBlock($(this));
+						$.get("{% url 'isc_auth:text_auth' api_hostname identifer%}", {type: 'call'}, function(data, textStatus, xhr) {
+							/*optional stuff to do after success */
+						});
+					});
+					$("#again-sms").click(function(event) {
+						if($(this).hasClass('disabled'))
+							return;
+						tryAgainBlock($(this));
+						$.get("{% url 'isc_auth:text_auth' api_hostname identifer%}", {type: 'sms'}, function(data, textStatus, xhr) {
+							/*optional stuff to do after success */
+						});
+					});
+					
+				});
+			</script>
+			<div class="col-xs-9">
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="0">
+					<div class="carousel-inner" role="listbox" style="height: 400px;">
+						<div class="item active">
+							<div id="list-left">
+								<button class="btn btn-primary btn-lg btn-block btn-list" style="text-align: left;" btn-data="1">
+								<ul class="list-inline" style="margin-bottom: 0px;">
+									<li><span class="glyphicon glyphicon-check"></span></li>
+									<li>向Auth App推送认证询问</li>
+									<li style="float: right;"><span class="badge">最为推荐</span></li>
+								</ul>
+								</button>
+								<button class="btn btn-primary btn-lg btn-block btn-list" style="text-align: left;" btn-data="2">
+								<ul class="list-inline" style="margin-bottom: 0px;">
+									<li><span class="glyphicon glyphicon-earphone"></span></li>
+									<li>向+86 {{phone}}拨打电话</li>
+								</ul>
+								</button>
+								<button class="btn btn-primary btn-lg btn-block btn-list" style="text-align: left;" btn-data="3">
+								<ul class="list-inline" style="margin-bottom: 0px;">
+									<li><span class="glyphicon glyphicon-envelope"></span></li>
+									<li>向+86 {{phone}}发送短信验证码</li>
+								</ul>
+								</button>
+								<button class="btn btn-primary btn-lg btn-block btn-list" style="text-align: left;" btn-data="4">
+								<ul class="list-inline" style="margin-bottom: 0px;">
+									<li><span class="glyphicon glyphicon-phone"></span></li>
+									<li>输入Auth App中的六位认证码</li>
+									<li style="float: right;"><span class="badge">离线可用</span></li>
+								</ul>
+								</button>
+							</div>
+						</div>
+						<div class="item" style="margin-left: 20px;">
+							<div class="panel panel-default list-item" list-order="1">
+								<div class="panel-heading">
+									<h3 class="panel-title">向Auth App推送认证询问</h3>
+								</div>
+								<div class="panel-body">
+									<p>请打开您的Auth App，确认此次登录行为。</p>
+									<div class="alert alert-danger" role="alert" id="authPushError" style="display: none;">
+										<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+										<span class="sr-only">Error:</span>
+										Auth App似乎没有连上网络，您需要打开应用或者选择六位验证码的验证方式。
+									</div>
+									<button class="btn btn-default btn-return">选择其他认证方式</button>
+								</div>
+							</div>
+							<div class="panel panel-default list-item" list-order="2">
+								<div class="panel-heading">
+									<h3 class="panel-title">向+86 {{phone}}拨打电话</h3>
+								</div>
+								<div class="panel-body">
+									<p>请输入通话中语音播送的六位数字验证码：</p>
+									<ul class="list-inline form-group" id="numlist-phone" data-placement="right" data-content="验证码不正确。" data-trigger="manual" style="width: 260px;">
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+									</ul>
+									<button class="btn btn-success" id="sendCode-phone">确认</button>
+									<button class="btn btn-default btn-again" id="again-phone">重新获得验证码</button>
+									<button class="btn btn-default btn-return">选择其他认证方式</button>
+								</div>
+							</div>
+							<div class="panel panel-default list-item" list-order="3">
+								<div class="panel-heading">
+									<h3 class="panel-title">向+86 {{phone}}发送短信验证码</h3>
+								</div>
+								<div class="panel-body">
+									<p>请输入随短信发送的六位数字验证码：</p>
+									<ul class="list-inline form-group" id="numlist-sms" data-placement="right" data-content="验证码不正确。" data-trigger="manual" style="width: 260px;">
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+									</ul>
+									<button class="btn btn-success" id="sendCode-sms">确认</button>
+									<button class="btn btn-default btn-again" id="again-sms">重新获得验证码</button>
+									<button class="btn btn-default btn-return">选择其他认证方式</button>
+								</div>
+							</div>
+							<div class="panel panel-default list-item" list-order="4">
+								<div class="panel-heading">
+									<h3 class="panel-title">输入Auth App中的六位认证码</h3>
+								</div>
+								<div class="panel-body">
+									<p>请打开您的Auth App，并输入此时显示的六位数字验证码：</p>
+									<ul class="list-inline form-group" id="numlist-app" data-placement="right" data-content="验证码不正确。" data-trigger="manual" style="width: 260px;">
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+										<li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+									</ul>
+									<button class="btn btn-success" id="sendCode-app">确认</button>
+									<button class="btn btn-default btn-return">选择其他认证方式</button>
+								</div>
+							</div>
+						</div>
+						<div class="item" style="margin-left: 20px;">
+							<div class="panel panel-default" id="result-success" style="display: none;">
+								<div class="panel-body">
+									<p class="text-center text-success" style="margin-top: 50px;">
+										<span class="glyphicon glyphicon-ok" style="font-size: 50px;"></span>
+									</p>
+									<h4 class="text-center" style="margin-bottom: 60px;">验证成功，3秒后将跳转至应用页</h4>
+								</div>
+							</div>
+							<div class="panel panel-default" id="result-fail" style="display: none;">
+								<div class="panel-body">
+									<p class="text-center text-danger" style="margin-top: 50px;">
+										<span class="glyphicon glyphicon-remove" style="font-size: 50px;"></span>
+									</p>
+									<h4 class="text-center" style="margin-bottom: 60px;">验证失败，3秒后返回登陆页</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+		</body>
+	</html>

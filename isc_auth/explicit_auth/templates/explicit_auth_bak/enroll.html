@@ -1,0 +1,10 @@
+<h1>Enroll<h1>
+
+<form action="{% url 'isc_auth:enroll' api_hostname iKey%}"
+method="post">
+{% csrf_token %}
+<p>
+Please enter your phone number: &nbsp
+<input type="text" name="phone" id="phone"><br/>
+<button id="submit" >submit</buttom> 
+</p>
