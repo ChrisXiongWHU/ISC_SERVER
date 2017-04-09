@@ -1,12 +1,11 @@
 #coding:utf-8
 
-
 import base64
 import random
 from Crypto.Cipher import AES
-from isc_auth.tools.uniform_tools import createRandomFields
 import qrcode
 import cStringIO
+import json
 
 
 
@@ -18,8 +17,15 @@ EXPLICIT_AUTH_PREFIX = "AUTH"
 
 
 EXPLICIT_REPLY_COMMAND = "EXPLICIT"
+REQUIRE_INFO_COMMAND = "REQUIRE"
 
 
+def createRandomFields(size):
+    choice = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
+    ret = []
+    for i in xrange(size):
+        ret.append(random.choice(choice))
+    return ''.join(ret)
 
 
 
@@ -38,12 +44,19 @@ def gen_b64_random_and_code(key,prefix,data=None):
     e = encrypt(key,cookie)
     return random_number,base64.b64encode(e)
 
+def decrypt_json_to_object(e,key):
+    '''
+    b64(AES(json)) => json Object
+    '''
+    b64 = base64.b64decode(e)
+    d = decrypt(key,b64)
+    return json.loads(d)
 
-def decrypt_and_validate_info(e,key,random_number,prefix=None):
+def validate_info(info,random_number,prefix=None):
     '''
-    解密客户端回传信息，检验其随机数及前缀合法性，并返回除验证随机数以外的内容
+    检验客户端回传随机数及前缀合法性，并返回除验证随机数以外的内容
     '''
-    info = decrypt(key,base64.b64decode(e)).split('\0')
+    info = info.split('\0')
     random_number = random_number[::-1]
     if random_number != info[-1]:
         raise AuthFailedError()
@@ -52,6 +65,12 @@ def decrypt_and_validate_info(e,key,random_number,prefix=None):
             raise AuthFailedError(info)
     info.pop()
     return info
+
+def decrypt_and_validate_info(e,key,random_number,prefix=None):
+    '''
+    解密客户端回传信息，检验其随机数及前缀合法性，并返回除验证随机数以外的内容
+    '''
+    return validate_info(decrypt(key,base64.b64decode(e)),random_number,prefix)
 
 def generate_captcha(api_hostname,identifer,dKey):
     '''
@@ -75,6 +94,8 @@ def generate_aes_key():
     '''
     return createRandomFields(32)
 
+def base64_encrypt(key,text):
+    return base64.b64encode(encrypt(key,text))
 
 def encrypt(key,text):
     cryptor = AES.new(key,AES.MODE_CBC,b'0000000000000000')

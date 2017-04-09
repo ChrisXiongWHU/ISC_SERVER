@@ -5,6 +5,7 @@ from channels.asgi import get_channel_layer
 from channels import Channel
 import json
 import random
+from isc_auth.tools.auth_tools.app_auth_tools import decrypt_json_to_object
 
 def createRandomFields(size):
     choice = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789'
@@ -45,12 +46,12 @@ def multiplex_auth(message,channel):
 
 def multiplex(message,channel):
     try:
-        content = json.loads(message.content['text'])
+        content = decrypt_json_to_object(message.content['text'],message['key'])
     except:
         message.reply_channel.send({"text":"Your data format should be json"})
-        message.reply_channel_send({"close":True})
+        message.reply_channel.send({"close":True})
         return
-
+    
     action = content.get("action","")
     payload = {}
     payload['reply_channel'] = message.content['reply_channel']
@@ -58,6 +59,24 @@ def multiplex(message,channel):
     #content为python字典
     payload['text'] = content
     payload['action'] = action
-
     Channel(channel).send(payload)
+
+
+
+    # try:
+    #     content = json.loads(message.content['text'])
+    # except:
+    #     message.reply_channel.send({"text":"Your data format should be json"})
+    #     message.reply_channel_send({"close":True})
+    #     return
+
+    # action = content.get("action","")
+    # payload = {}
+    # payload['reply_channel'] = message.content['reply_channel']
+    # payload['path'] = message.content['path']
+    # #content为python字典
+    # payload['text'] = content
+    # payload['action'] = action
+
+    # Channel(channel).send(payload)
 

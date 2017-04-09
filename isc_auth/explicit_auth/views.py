@@ -156,7 +156,8 @@ def check_bind(request,api_hostname,identifer):
             device.is_activated=True
             device.save()
 
-            content_encrypt = app_auth_tools.encrypt(key,"INFO\0%s" % json.dumps({
+            content_encrypt = app_auth_tools.encrypt(key,json.dumps({
+                "type":"info",
                 "data":"test data",
                 "seed":device.seed
             }))
@@ -233,7 +234,7 @@ APP离线认证码认证,interval设置为30分钟
 def random_code_auth(request,api_hostname,identifer):
     random_code = request.POST['code']
     seed = Device.objects.get(identifer=identifer).seed
-    totp = pyotp.TOTP(key,interval=60*30)
+    totp = pyotp.TOTP(key,interval=30)
     #TODO 计算服务器的随机数码
     #TODO 获取标准时间
     server_random_code = totp.at()

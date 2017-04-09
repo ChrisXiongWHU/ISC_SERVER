@@ -13,10 +13,12 @@ def explicit_auth_message_handle(message,api_hostname,identifer):
     if random is None:
         message.reply_channel.send({"text":"{'info':'The explicit auth is timeout'}"})
     try:
-        key = message.channel_session["key"]
+        # key = message.channel_session["key"]
         from pprint import pprint
         pprint(message.__dict__)
-        prefix, = app_auth_tools.decrypt_and_validate_info(message.content["info"],key,random)
+        prefix, = app_auth_tools.validate_info(message.content["text"]["info"],random)
+
+        # prefix, = app_auth_tools.decrypt_and_validate_info(message.content["info"],key,random)
         print prefix
     except Exception,e:
         raise e

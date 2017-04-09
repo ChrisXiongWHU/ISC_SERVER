@@ -10,6 +10,7 @@ from .models import Device
 from django.db.models import Empty
 
 
+
    
 @channel_session
 def ws_connect(message,api_hostname,identifer):
@@ -45,6 +46,7 @@ def ws_connect(message,api_hostname,identifer):
 def ws_message(message,api_hostname,identifer):
     #若已经过认证（已建立合法通道）
     if message.channel_session['auth']:
+        message['key'] = message.channel_session['key']
         multiplex(message,"message.receive")
     else:
         multiplex_auth(message,"auth_message.receive")
@@ -59,6 +61,20 @@ def not_find_action(message,api_hostname,identifer):
     pass
 
 
+def send_account_info_handle(message,api_hostname,identifer):
+    device = Device.objects.get(identifer=identifer)
+    key = device.dKey
+    seed = device.seed
+    content_encrypt = app_auth_tools.base64_encrypt(key,json.dumps({
+                "type":"info",
+                "data":"test data",
+                "seed":seed
+            }))
+    message.reply_channel.send({
+        "text":content_encrypt
+    })
+
+
 
 @channel_session
 def auth_message_handle(message,api_hostname,identifer):
@@ -67,8 +83,8 @@ def auth_message_handle(message,api_hostname,identifer):
     '''
     #test
     message.channel_session['auth'] = True
-    message.reply_channel.send({"text":"Auth Passed.The connection established"})
     Group("device-%s-%s" %(identifer,api_hostname)).add(message.reply_channel)
+    message.reply_channel.send({"text":app_auth_tools.base64_encrypt(message.channel_session["key"],"OK")})
     # key = message.channel_session['key']
     # info = message.content["text"]
     # random = message.channel_session['setup_random']
