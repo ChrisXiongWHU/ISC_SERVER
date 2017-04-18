@@ -11,6 +11,7 @@ url_hostname = r'^api-(?P<api_hostname>[a-zA-Z1-9]+)/frame/%s/$'
 explicit_auth_urlpatterns = [
     url(url_hostname %'auth',explicit_auth.views.auth_pre,name='pre_auth'),
     url(url_hostname %'enroll',explicit_auth.views.enroll,name='enroll'),
+    url(url_hostname %'do_enroll',explicit_auth.views.do_enroll,name='do_enroll' ),
     url(url_hostname_identifer %'auth_check_ws',explicit_auth.views.auth_check_ws,name='auth_check_ws'),
     url(url_hostname_identifer %'push_auth',explicit_auth.views.auth,name='push_auth'),
     url(url_hostname_identifer %'auth_redirect',explicit_auth.views.auth_redirect,name='auth_redirect'),    

@@ -17,7 +17,7 @@ from isc_auth.tools.auth_tools import app_auth_tools,duoTools,text_mobile_tools
 
 import json,time,random,base64
 import pyotp
-from datetime import datetime
+import time
 
 
 '''
@@ -106,20 +106,53 @@ def enroll(request,api_hostname):
     #若该请求为提交表单
     elif request.method =='POST':
         phone = request.POST['tel']
-        userName = request.session.get('sig_dict',None)['content'][0]
-        parent = request.session.get('parent',None)
-        account = Account.objects.get(api_hostname=api_hostname)
+        # userName = request.session.get('sig_dict',None)['content'][0]
+        # parent = request.session.get('parent',None)
+        # account = Account.objects.get(api_hostname=api_hostname)
         request.session['phone'] = phone
+        tool = text_mobile_tools.SMS_Call_Tool()
+        #生成认证随机码
+        pre_choices = '0123456789'
+        auth_code = ''
+        for i in xrange(6):
+            auth_code += random.choice(pre_choices)
+        #发送请求      
+        wait_time = 2
+        tool.action(phone,auth_code,wait_time,'sms')
+        request.session['enroll_code'] = auth_code
+        return HttpResponse()
 
-        #防止重复提交表单，捕获实体完整性错误
-        try:
-            user = User.objects.create(user_name=userName,user_phone=phone,account=account)
-            device = Device.objects.create(user=user,account=account,**Device.new_device(api_hostname))
-        except IntegrityError,e:
-            user = User.objects.get(user_name=userName)
-            device = user.device_set.all()[0]
-        return HttpResponse(device.identifer)
+        # #防止重复提交表单，捕获实体完整性错误
+        # try:
+        #     user = User.objects.create(user_name=userName,user_phone=phone,account=account)
+        #     device = Device.objects.create(user=user,account=account,**Device.new_device(api_hostname))
+        # except IntegrityError,e:
+        #     user = User.objects.get(user_name=userName)
+        #     device = user.device_set.all()[0]
+        # return HttpResponse(device.identifer)
 ##
+
+def do_enroll(request,api_hostname):
+    code = request.POST['code']
+    if code != request.session['enroll_code']:
+        return HttpResponse(json.dumps({"status":"denied"}))
+
+    userName = request.session.get('sig_dict',None)['content'][0]
+    parent = request.session.get('parent',None)
+    account = Account.objects.get(api_hostname=api_hostname)
+    phone = request.session['phone']
+    #防止重复提交表单，捕获实体完整性错误
+    try:
+        user = User.objects.create(user_name=userName,user_phone=phone,account=account)
+        device = Device.objects.create(user=user,account=account,**Device.new_device(api_hostname))
+    except IntegrityError,e:
+        user = User.objects.get(user_name=userName)
+        device = user.device_set.all()[0]
+    return HttpResponse(json.dumps({"status":"succeed","identifer":device.identifer}))
+
+
+
+
 
 
 '''
@@ -197,7 +230,7 @@ def sms_call_auth(request,api_hostname,identifer):
             auth_code += random.choice(pre_choices)
         #发送请求      
         wait_time = 2
-        action_type = request.GET['type']
+        action_type =   request.GET['type']
         tool.action(phone,auth_code,wait_time,action_type)
         #120秒
         cache.set("device-%s-%s_%s_code" %(identifer,api_hostname,action_type),auth_code,wait_time*60-10)
@@ -237,8 +270,8 @@ def random_code_auth(request,api_hostname,identifer):
     totp = pyotp.TOTP(key,interval=30)
     #TODO 计算服务器的随机数码
     #TODO 获取标准时间
-    server_random_code = totp.at()
-    return auth_result_common_action(request,random_code == server_random_code)
+    server_random_code = totp.at(time.time())
+    return auth_result_common_action(request,totp.verify(random_code,time.time(),1))
 ##
 
     
@@ -257,7 +290,7 @@ def auth_check_ws(request,api_hostname,identifer):
         if len(device_group_list)>0:
             key = get_session_from_channels(device_group_list,"key")
             data = {"xxx":"xxx"}
-            random,code = app_auth_tools.gen_b64_random_and_code(key,app_auth_tools.EXPLICIT_AUTH_PREFIX,data)
+            random,code = app_auth_tools.gen_b64_encrypt_explicit_auth_code(key,data)
             cache.set("device-%s-%s_explicit_random" %(identifer,api_hostname),random,118)
             Group(device_group_name).send({"text":code})
             return HttpResponse(content=json.dumps({'status':'ok'}))
@@ -268,6 +301,8 @@ def auth_check_ws(request,api_hostname,identifer):
         return HttpResponse(content=json.dumps({'status':'pending'}))
 ##
 
+
+
 '''
 push认证，检查由channels进行websocket认证参数检查
 '''
@@ -276,7 +311,7 @@ def auth(request,api_hostname,identifer):
     device_group_list = get_channel_layer().group_channels(device_group_name)
     #若连接中断
     if len(device_group_list) == 0:
-        return HttpResponse(content=json.dumps({'status':'pending'}))
+        return HttpResponse(content=json.dumps({'status':'pending','seq':request.session['seq']}))
 
     # 每3秒检查一次认证情况,最多不超过60秒
     for i in xrange(20):
@@ -285,11 +320,14 @@ def auth(request,api_hostname,identifer):
         if auth_status is None:
             time.sleep(3)       
         else:
+            del cache["device-%s-%s_auth" %(identifer,api_hostname)]
             return auth_result_common_action(request,auth_status)
     # 认证未进行
     else:
         return HttpResponse(content=json.dumps({'status':'pending'}))
 ##
+
+
 
 
 

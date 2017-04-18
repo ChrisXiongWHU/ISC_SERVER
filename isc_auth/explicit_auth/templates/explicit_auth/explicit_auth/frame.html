@@ -1,179 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>使用Auth</title>
-		<meta charset="utf-8">
-		</script>
-		{% load static %}
-		<script src="{% static "jquery-1.9.1.js" %}"></script>
-		<link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
-		<script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
-		<script>
-		var identifer = "{{identifer}}";
-		</script
-	</head>
-	<body style="width: 700px; height: 500px; padding: 10px; background-color: #f9f9f9 ">
-		<form id="to_auth"></form>
-		<div class="container-fluid">
-			<div class="col-xs-3">
-				<p class="text-center">您正在使用Auth<br>尝试登入</p>
-				<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWIxNDQ5Y2JmNiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1YjE0NDljYmY2Ij48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" alt="..." class="img-responsive img-circle block-center">
-				<h4 class="text-center">Blog</h4>
-			</div>
-			<div class="col-xs-9" style="background-color: white">
-				<h5>Auth将为您提供安全的多因素身份认证。加入Auth只需三步：</h5>
-				<div class="panel-group">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4 class="panel-title">第一步：验证您的手机号码</h4>
-						</div>
-						<div class="panel-collapse collapse in" id="collapseOne">
-							<div class="panel-body">
-								<p>请输入您的手机号</p>
-								<script>
-									$(function(){
-										if({{ has_enrolled }}) {
-											$("#collapseOne").collapse("hide");
-											$("#collapseTwo").collapse("show");
-										}
 
-										$("#inputTel").bind('input propertychange', function(event) {
-											var str = $(this).val();
-											if(str.charAt(str.length - 1) > '9' || str.charAt(str.length - 1) < '0') {
-												$(this).val(str.substring(0, str.length - 1));
-											}
-										});
-										$("#inputTel").blur(function(){
-											var tel = $(this).val();
-											if(tel.length == 11){
-												$("#code-tel").text("+86 " + tel.substring(0, 3) + "-" + tel.substring(3, 7) + "-" + tel.substring(7, 11));
-												$("#checkbox-tel").slideDown();
-											}
-											else {
-												$("#checkbox-tel").slideUp();
-												$("#inputTel").parent().parent().addClass('has-error');
-												$("#inputTel").popover("show");
-											}
-										});
-										$("#inputTel").focus(function(event) {
-											$("#inputTel").parent().parent().removeClass('has-error');
-											$("#inputTel").popover("hide");
-										});
-										$("#checkbox-submit").click(function(){
-											if($(this).prop("checked")) {
-												$("#btn-submit").removeClass("disabled");
-											}
-											else {
-												$("#btn-submit").addClass("disabled");
-											}
-										});
-										$("#btn-submit").click(function(event){
-											if($("#checkbox-submit").prop("checked")) {
-												$.post("{% url 'isc_auth:enroll' api_hostname %}", {tel: $("#inputTel").val()}, function(data, textStatus, xhr) {
-													if(textStatus == 'success') {
-														$("#collapseOne").collapse("hide");
-														$("#collapseTwo").collapse("show");
-														identifer = data		
-													}
-													else {
-													}
-												});
-											}
-										});
-									});
-								</script>
-								<form>
-									<div class="form-group">
-										<div class="input-group input-group-lg">
-											<div class="input-group-addon">+86</div>
-											<input type="tel" class="form-control" id="inputTel" placeholder="13012345678" maxlength="11" style="width: 150px;" data-placement="right" data-content="请输入13位手机号。" data-trigger="manual">
-										</div>
-									</div>
-									
-									<div class="checkbox" id="checkbox-tel" style="display: none;">
-										<label>
+<head>
+    <title>使用Auth</title>
+    <meta charset="utf-8">
+    </script>
+    {% load static %}
+    <script src="{% static "jquery-1.9.1.js" %}"></script>
+    <link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+    <script src="{% static "jquery.timer.js" %}"></script>
+    <script>
+        var identifer = "{{identifer}}";
+
+        $(function() {
+            $.ajaxSetup({
+                timeout: 0
+            });
+        });
+    </script>
+</head>
+
+<body style="width: 700px; height: 500px; padding: 10px; background-color: #f9f9f9">
+    <form id="to_auth"></form>
+    <div class="container-fluid">
+        <div class="col-xs-3">
+            <p class="text-center">您正在使用Auth<br>尝试登入</p>
+            <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWIxNDQ5Y2JmNiB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1YjE0NDljYmY2Ij48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4="
+                alt="..." class="img-responsive img-circle block-center">
+            <h4 class="text-center">Blog</h4>
+        </div>
+        <div class="col-xs-9" style="background-color: white">
+            <h5>Auth将为您提供安全的多因素身份认证。加入Auth只需三步：</h5>
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">第一步：验证您的手机号码</h4>
+                    </div>
+                    <div class="panel-collapse collapse in" id="collapseOne">
+                        <div class="panel-body">
+                            <p>请输入您的手机号</p>
+                            <script>
+                                $(function() {
+                                    if ({{ has_enrolled }}) {
+                                        $("#collapseOne").collapse("hide");
+                                        $("#collapseTwo").collapse("show");
+                                    }
+
+                                    $("#inputTel").bind('input propertychange', function(event) {
+                                        var str = $(this).val();
+                                        if (str.charAt(str.length - 1) > '9' || str.charAt(str.length - 1) < '0') {
+                                            $(this).val(str.substring(0, str.length - 1));
+                                        }
+                                    });
+                                    $("#inputTel").blur(function() {
+                                        var tel = $(this).val();
+                                        if (tel.length == 11) {
+                                            $("#code-tel").text("+86 " + tel.substring(0, 3) + "-" + tel.substring(3, 7) + "-" + tel.substring(7, 11));
+                                            $("#checkbox-tel").slideDown();
+                                        } else {
+                                            $("#checkbox-tel").slideUp();
+                                            $("#inputTel").parent().parent().addClass('has-error');
+                                            $("#inputTel").popover("show");
+                                        }
+                                    });
+                                    $("#inputTel").focus(function(event) {
+                                        $("#inputTel").parent().parent().removeClass('has-error');
+                                        $("#inputTel").popover("hide");
+                                    });
+                                    $("#checkbox-submit").click(function() {
+                                        if ($(this).prop("checked")) {
+                                            $("#btn-submit").removeClass("disabled");
+                                        } else {
+                                            $("#btn-submit").addClass("disabled");
+                                        }
+                                    });
+                                    $(".input-num").bind('input propertychange', function(event) {
+                                        var str = $(this).val();
+                                        if (str == "") {
+                                            var input = $(this).parent().siblings();
+                                            input.children().val("");
+                                            input.children()[0].focus();
+                                        } else if (str.charAt(0) > '9' || str.charAt(0) < '0') {
+                                            $(this).val("");
+                                        } else {
+                                            $(this).parent().next().children()[0].focus();
+                                        }
+                                    });
+
+                                    var againTime = 0;
+
+                                    function tryAgainBlock() {
+                                        var button = $(".btn-again");
+                                        againTime = 60;
+                                        button.text("重新获得验证码（" + againTime + "秒）");
+                                        button.addClass('disabled');
+
+                                        var timer = $.timer(1000, function(timer) {
+                                            if (againTime > 1) {
+                                                againTime--;
+                                                button.text("重新获得验证码（" + againTime + "秒）");
+                                                timer.reset(1000);
+                                            } else {
+                                                againTime = 0;
+                                                button.text("重新获得验证码");
+                                                button.removeClass('disabled');
+                                            }
+                                        });
+                                    }
+
+                                    $("#btn-submit").click(function(event) {
+                                        $.post("{% url 'isc_auth:enroll' api_hostname %}", {
+                                            tel: $("#inputTel").val()
+                                        }, function(data, textStatus, xhr) {
+
+                                        });
+                                        $("#check-phone-modal").modal({
+                                            keyboard: false,
+                                            backdrop: "static"
+                                        });
+                                    });
+
+                                    function getCodeSix() {
+                                        var numList = $("#numlist-phone").children()
+                                        var code = "";
+                                        for (var i = 0; i < numList.length; i++) {
+                                            code += numList[i].value;
+                                        }
+                                        return code;
+                                    }
+                                    $("#sendCode-phone").click(function(event) {
+                                        $.post("{% url 'isc_auth:do_enroll' api_hostname %}", {
+                                            code: getCodeSix()
+                                        }, function(data, textStatus, xhr) {
+                                            var obj = eval("(" + data + ")");
+                                            if (obj["status"] == "success") {
+                                                identifer = obj["identifer"];
+                                                alert();
+                                            }
+                                        })
+                                    });
+                                });
+                            </script>
+                            <form>
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-addon">+86</div>
+                                        <input type="tel" class="form-control" id="inputTel" placeholder="13012345678" maxlength="11" style="width: 150px;" data-placement="right" data-content="请输入13位手机号。" data-trigger="manual">
+                                    </div>
+                                </div>
+
+                                <div class="checkbox" id="checkbox-tel" style="display: none;">
+                                    <label>
 											<input type="checkbox" id="checkbox-submit">我确定号码<code id="code-tel">+86 130-1234-5678</code>准确无误。
 										</label>
-									</div>
-								</form>
-								<button class="btn btn-success disabled" id="btn-submit">下一步</button>
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4 class="panel-title">第二步：下载Auth App至您的移动设备</h4>
-						</div>
-						<div id="collapseTwo" class="panel-collapse collapse">
-							<div class="panel-body">
-								<div class="row" style="margin-bottom: 10px;">
-									<div class="col-xs-4">
-										<img class="img-thumbnail img-responsive">
-									</div>
-									<div class="col-xs-8">
-										<p>　　如果您持有iPhone或者搭载Android操作系统的智能手机，请前往App Store或Google Play搜索“Auth Mobile”，或者扫描左方的二维码，下载Auth App。</p>
-										
-									</div>
-								</div>
-								<button class="btn btn-success" id="btn-goToThree">我已安装Auth App</button>
-							</div>
-						</div>
-					</div>
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4 class="panel-title">第三步：激活您的Auth App</h4>
-						</div>
-						<div id="collapseThree" class="panel-collapse collapse">
-							<div class="panel-body">
-								<script>
-									$(function(){
-										function checkAuth() {
-												$.post("/api-{{api_hostname}}/"+identifer+"/frame/bind_device/", 
-												{type: 'enroll-qrcode'}, function(data, textStatus, xhr) {
-													$("#enroll-qrcode").attr("src",  "data:image/png;base64," + data);
-													$.post("/api-{{api_hostname}}/"+identifer+"/frame/check_bind/", {type: 'check-auth'}, function(data, textStatus, xhr) {
-														var obj = eval("(" + data + ")");
-														if(obj["status"] == "ok") {
-															$("#to_auth").attr('action',"/api-{{api_hostname}}/"+identifer+"/frame/auth_redirect/")
-															$("#to_auth").submit();
-														}
-														else if(obj["status"] == "pending") {
-															checkAuth();
-														}
-														else{
-															// error
-														}
-													});
-												});
-											}
+                                </div>
+                            </form>
+                            <button class="btn btn-success disabled" id="btn-submit">验证手机号码</button>
+                            <div class="modal fade" id="check-phone-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                                <div class="modal-dialog modal-sm" role="document" style="width: 350px">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="padding: 15px 15px 10px 15px">
+                                            <h4>验证手机号码</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>请输入通话中语音播送的六位数字验证码：</p>
+                                            <ul class="list-inline form-group" id="numlist-phone" data-placement="right" data-content="验证码不正确。" data-trigger="manual" style="width: 260px;">
+                                                <li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+                                                <li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+                                                <li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+                                                <li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+                                                <li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+                                                <li><input type="text" class="form-control text-center input-num" maxlength="1" style="width: 30px; padding: 5px 7px; font-size: 23px;"></li>
+                                            </ul>
 
-										$("#btn-goToThree").click(function(event) {
-											$("#collapseThree").collapse("show");
-											$("#collapseTwo").collapse("hide");
-											
-											checkAuth();
-										});
-									});
-								</script>
-								<div class="row" style="margin-bottom: 10px;">
-									<div class="col-xs-4">
-										<img class="img-thumbnail img-responsive" id="enroll-qrcode">
-									</div>
-									<div class="col-xs-8">
-										<ol>
-											<li>打开Auth App</li>
-											<li>点击“+”按钮</li>
-											<li>扫描左方二维码</li>
-										</ol>
-										
-									</div>
-								</div>
-								<button class="btn btn-default" style="margin-right: 10px;">返回</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-success" id="sendCode-phone">确认</button>
+                                            <button class="btn btn-default btn-again" id="again-phone">重新获得验证码</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">第二步：下载Auth App至您的移动设备</h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-xs-4">
+                                    <img class="img-thumbnail img-responsive">
+                                </div>
+                                <div class="col-xs-8">
+                                    <p>　　如果您持有iPhone或者搭载Android操作系统的智能手机，请前往App Store或Google Play搜索“Auth Mobile”，或者扫描左方的二维码，下载Auth App。</p>
+
+                                </div>
+                            </div>
+                            <button class="btn btn-success" id="btn-goToThree">我已安装Auth App</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">第三步：激活您的Auth App</h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <script>
+                                $(function() {
+                                    function checkAuth() {
+                                        $.post("/api-{{api_hostname}}/" + identifer + "/frame/bind_device/", {
+                                            type: "enroll-qrcode"
+                                        }, function(data, textStatus, xhr) {
+                                            $("#enroll-qrcode").attr("src", "data:image/png;base64," + data);
+                                            $.post("/api-{{api_hostname}}/" + identifer + "/frame/check_bind/", {
+                                                type: 'check-auth'
+                                            }, function(data, textStatus, xhr) {
+                                                var obj = eval("(" + data + ")");
+                                                if (obj["status"] == "ok") {
+                                                    $("#to_auth").attr('action', "/api-{{api_hostname}}/" + identifer + "/frame/auth_redirect/")
+                                                    $("#to_auth").submit();
+                                                } else if (obj["status"] == "pending") {
+                                                    checkAuth();
+                                                } else {
+                                                    // error
+                                                }
+                                            });
+                                        });
+                                    }
+
+
+                                    $("#btn-goToThree").click(function(event) {
+                                        $("#collapseThree").collapse("show");
+                                        $("#collapseTwo").collapse("hide");
+
+                                        checkAuth();
+                                    });
+                                });
+                            </script>
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-xs-4">
+                                    <img class="img-thumbnail img-responsive" id="enroll-qrcode">
+                                </div>
+                                <div class="col-xs-8">
+                                    <ol>
+                                        <li>打开Auth App</li>
+                                        <li>点击“+”按钮</li>
+                                        <li>扫描左方二维码</li>
+                                    </ol>
+
+                                </div>
+                            </div>
+                            <button class="btn btn-default" style="margin-right: 10px;">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>

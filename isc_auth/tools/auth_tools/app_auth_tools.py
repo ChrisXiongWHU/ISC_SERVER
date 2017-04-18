@@ -13,9 +13,8 @@ CONNECTION_SETUP_PREFIX = "SYN"
 CONNECTION_REPLY_PREFIX = "ACK"
 EXPLICIT_SUCCEED_PREFIX = "SUCCEED"
 EXPLICIT_DENIED_PREFIX = "FAILED"
-EXPLICIT_AUTH_PREFIX = "AUTH"
 
-
+EXPLICIT_AUTH_TYPE = "autopush"
 EXPLICIT_REPLY_COMMAND = "EXPLICIT"
 REQUIRE_INFO_COMMAND = "REQUIRE"
 
@@ -32,17 +31,35 @@ def createRandomFields(size):
 class AuthFailedError(Exception):
     pass
 
-def gen_b64_random_and_code(key,prefix,data=None):
+
+def gen_b64_encrypt_explicit_auth_code(key,data=None):
     '''
-    生成服务器认证码（BASE64）
+    生成服务器认证码,返回随机数和认证码（随机20字节）
+    '''
+    if data is None:
+        data = {}
+    random_number = createRandomFields(20)
+    cookie = json.dumps({
+        'type':EXPLICIT_AUTH_TYPE,
+        'random':random_number,
+        'data':data
+    })
+    return random_number,base64.b64encode(encrypt(key,cookie))
+
+
+def gen_random_and_code(prefix,data=None):
+    '''
+    生成服务器认证码,未加密以及base64编码,返回认证码（随机20字节）
     '''
     random_number = createRandomFields(20)
+
     cookie = prefix
     if data is not None:
         cookie += "\0%s" %(data)    
     cookie += "\0%s" %(random_number)   
-    e = encrypt(key,cookie)
-    return random_number,base64.b64encode(e)
+    return random_number,cookie
+    # e = encrypt(key,cookie)
+    # return random_number,base64.b64encode(e)
 
 def decrypt_json_to_object(e,key):
     '''

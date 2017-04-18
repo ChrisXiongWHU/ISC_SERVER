@@ -106,7 +106,7 @@ def decrypt_and_validate_info(e,key,random_number,prefix=None):
 
 key = 'VXandQKqNs89y78bHj3DbHHmQsaHlkvH'
 
-auth_text = 'd/07W9pVbciSnuFi/INjp1ufCm1HtvZjhpmTwz77qNA='
+auth_text = 'Edp3KHi5Me7K2zNIO9vFJYTzwV6THq0MU5Mb8rWIa8Q='
 # data_text = 'h1gWAD95y8fakI3Q2p7HnknUp4QUjOZ5CNm8tdhHyv5wMx4XdboCHWvxxWC0hKDcXut2Geqk+uC4YfcPvUjB1Q=='
 explicit_text = 'LejfdhQQSIzHHeeR51Og0JKR9407JefmsGEmAAkZRAKmpN8qm9AHOwBXIn1APAFp'
 
@@ -134,20 +134,24 @@ def gen_require_info_text(key):
 # print de(key,app_text)
 
 
-import pyotp
-import ntplib
-from time import ctime
-from pprint import pprint
-c = ntplib.NTPClient()
-r = c.request('42.96.167.209',version=3)
-t = pyotp.TOTP(pyotp.random_base32(),interval=30)
-print t.at(r.tx_time)
+
+# import pyotp
+# import ntplib
+# import time
+# from datetime import datetime
+# from pprint import pprint
+# c = ntplib.NTPClient()
+# r = c.request('202.112.10.60',version=3)
+# t = pyotp.TOTP(pyotp.random_base32(),interval=30)
+# print r.tx_time
+# print time.time()
+# print t.at(r.tx_time)
+
 # print r.tx_time
 
 
 # identifer = 'RwHGKXONuEOb1Vome5Bf'
 # api_hostname = 'DHA4ufjn'
-
 
 
 

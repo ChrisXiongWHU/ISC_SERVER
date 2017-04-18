@@ -61,22 +61,3 @@ def multiplex(message,channel):
     payload['action'] = action
     Channel(channel).send(payload)
 
-
-
-    # try:
-    #     content = json.loads(message.content['text'])
-    # except:
-    #     message.reply_channel.send({"text":"Your data format should be json"})
-    #     message.reply_channel_send({"close":True})
-    #     return
-
-    # action = content.get("action","")
-    # payload = {}
-    # payload['reply_channel'] = message.content['reply_channel']
-    # payload['path'] = message.content['path']
-    # #content为python字典
-    # payload['text'] = content
-    # payload['action'] = action
-
-    # Channel(channel).send(payload)
-

@@ -1,0 +1,20 @@
+{
+    "remotePath": "./home/ubuntu/ISC",
+    "host": "182.254.147.95",
+    "username": "ubuntu",
+    "password": "l19970118",
+    "port": 21,
+    "secure": false,
+    "protocol": "ftp",
+    "uploadOnSave": false,
+    "passive": false,
+    "debug": true,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store",
+        "\\*.pyc"
+    ]
+}

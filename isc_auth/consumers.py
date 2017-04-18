@@ -96,7 +96,7 @@ def auth_message_handle(message,api_hostname,identifer):
     else:
         #认证通过,置session位，并将其加入Group
         message.channel_session['auth'] = True
-        message.reply_channel.send({"text":"Auth Passed.The connection established"})
+        message.reply_channel.send({"text":app_auth_tools.base64_encrypt(message.channel_session["key"],"OK")})
         Group("device-%s-%s" %(identifer,api_hostname)).add(message.reply_channel)
 
 

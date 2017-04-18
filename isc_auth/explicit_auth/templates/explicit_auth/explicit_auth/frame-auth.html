@@ -83,9 +83,6 @@
 									if(pushOngoing) {
 										if(obj2["status"] == "ok") {
 											success();
-											var data = obj2["data"];
-                							var parent = obj2["parent"];
-                							window.parent.postMessage(data,parent);
 										}
 										else if(obj2["status"] == "denied") {
 											fail();
